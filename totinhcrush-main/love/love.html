@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="love.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div class="wrapper">
+    <img src="../thư love.png" alt="">
+    <div class="formInput">
+        <div class="boxHands">
+            <div class="handsCat">
+                <img src="../image/handsCat.png" alt="">
+            </div>
+            <h1>Hí. Xin chào ngoan xinh yêu</h1>
+        </div>
+        <div class="boxSlider">
+            <div class="listSlider">
+                <div class="slider">
+                    <img src="../image/love1.jfif" alt="">
+                </div>
+                <div class="slider">
+                    <img src="../image/love2.png" alt="">
+                </div>
+            </div>
+            <div class="left">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="right">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+        <div class="boxHandsInput">
+            <div class="handsCatImgInput">
+                <img src="../image/handsCat.png" alt="">
+            </div>
+            <input type="text" id="inputField" placeholder="Nhập tên...">
+        </div>
+        <div class="buttonLove">
+            <div class="cricleBtn"></div>
+            <div class="button"></div>
+        </div>
+    </div>
+    <div class="boxLine">
+        <div class="boxCar">
+            <img src="../image/car.gif" alt="">
+        </div>
+        <div class="boxHeart">
+            <div class="heart1"></div>
+            <div class="heart2"></div>
+            <div class="heart3"></div>
+            <div class="heart4"></div>
+            <div class="heart5"></div>
+            <div class="heart6"></div>
+        </div>
+        <div class="ground-line">
+            <div>
+                <span class="line1"></span>
+                <span class="line2"></span>
+                <span class="line3"></span>
+                <span class="line4"></span>
+                <span class="line5"></span>
+                <span class="line1"></span>
+                <span class="line2"></span>
+                <span class="line3"></span>
+                <span class="line4"></span>
+                <span class="line5"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loadingLove">
+    <div class="rhombus">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+    </div>
+</div>
+
+<div class="wrapperLetterForm">
+    <div class="boxLetter">
+        <i class="fa-solid fa-xmark"></i>
+        <div class="formLetter">
+            <div class="heartLetter">
+                <div class="heartLetterItem"></div>
+            </div>
+            <div class="heartLetter">
+                <div class="heartLetterItem"></div>
+            </div>
+            <div class="wrapperLetter">
+                <div class="giftbox">
+                    <div class="img">
+                        <img src="../image/giftbox.png" alt="">
+                    </div>
+                </div>
+                <div class="textLetter">
+                    <h2></h2>
+                    <p class="contentLetter"></p>
+                    <div class="heartAnimation">
+                        <img src="../image/heartAnimation.gif" alt="">
+                    </div>
+                </div>
+                <div class="mewmew1">
+                    <img src="../image/mewmew.gif" alt="">
+                </div>
+                <div class="mewmew2">
+                    <img src="../image/mewmew.gif" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="before"></div>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script>
+    $(window).on('load', function() {
+        $('body').removeClass('preloading');
+        $('.loadingLove').delay(1000).fadeOut('fast');
+
+        const inputField = document.getElementById('inputField');
+        let userName = "";
+
+        inputField.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                userName = inputField.value; // Lấy giá trị từ inputField
+                updateButton();
+            }
+        });
+
+        function updateButton() {
+            setTimeout(() => {
+                document.querySelector(".buttonLove").style.transform = "translateY(0%)";
+                document.querySelector(".cricleBtn").style.transform = "scale(0.1)";
+                setTimeout(() => {
+                    document.querySelector(".cricleBtn").style.transform = "scale(1)";
+                    document.querySelector(".cricleBtn").innerHTML = "💗";
+                }, 200);
+                setTimeout(() => {
+                    document.querySelector(".buttonLove").style.width = "120px";
+                    document.querySelector(".button").style.transform = "translateX(25px)";
+                }, 300);
+                setTimeout(() => {
+                    document.querySelector(".button").style.width = "calc(100% - 25px)";
+                    document.querySelector(".button").style.height = "10px";
+                }, 400);
+                setTimeout(() => {
+                    document.querySelector(".button").style.height = "30px";
+                    document.querySelector(".button").innerHTML = "Nhận thư";
+                }, 600);
+            }, 700);
+        }
+
+        // Tạo hiệu ứng gõ chữ cho tiêu đề và nội dung thư
+        function updateLetterContent() {
+            let indexText = 0;
+            const textLetter = document.querySelector('.textLetter h2');
+            const greeting = `Gửi ${userName}!`;
+
+            textLetter.textContent = ''; // Xóa nội dung hiện tại
+            function displayGreeting() {
+                if (indexText < greeting.length) {
+                    textLetter.textContent += greeting[indexText];
+                    indexText++;
+                    setTimeout(displayGreeting, 100);
+                } else {
+                    setTimeout(displayLetterContent, 500);
+                }
+            }
+            displayGreeting();
+        }
+
+        function displayLetterContent() {
+            let indexTextContent = 0;
+            const textLetterContent = document.querySelector('.contentLetter');
+            const letterContent = `Anh. Ông trùm kéo view số một Việt Nam, mafia internet, chúc ${userName} ngày 20-10 vui vẻ, sinh đẹp, tỉ sự như mơ, vạn sự như ý, 8386. ${userName} Mãi Đỉnh Mãi Đỉnh Luôn!`;
+
+            textLetterContent.textContent = ''; // Xóa nội dung hiện tại
+
+            function typeContent() {
+                if (indexTextContent < letterContent.length) {
+                    textLetterContent.textContent += letterContent[indexTextContent];
+                    indexTextContent++;
+                    setTimeout(typeContent, 100);
+                }
+            }
+            typeContent();
+        }
+
+        document.querySelector(".buttonLove").addEventListener("click", function(){
+            createFlyingLetter()
+        })
+
+        function createFlyingLetter() {
+            let timeout = setInterval(()=>{
+                const letter = document.createElement("div");
+                letter.className = "letters";
+                letter.innerHTML = '<img src="../image/letters.png" alt="">';
+                document.querySelector("body").prepend(letter);
+
+                let left = Math.floor(Math.random() * 100);
+                let rotate = Math.floor(Math.random() * 360);
+                letter.style.left = left + "%";
+                letter.style.top = "-10%";
+                letter.style.transform = `rotate(${rotate}deg)`;
+
+                // Hiệu ứng thư bay xuống
+                setTimeout(() => {
+                    letter.style.top = "100%"; // Di chuyển thư xuống dưới
+                }, 1000);
+
+                // Xóa thư sau khi hoàn thành hiệu ứng bay
+                setTimeout(() => {
+                    letter.remove();
+                }, 11000); // Thời gian đủ để thư bay xuống
+
+                // Thêm sự kiện click cho thư
+                letter.addEventListener("click", function() {
+                    $(".wrapperLetterForm").fadeIn(); // Hiển thị nội dung thư
+                    clearInterval(timeout)
+                    updateLetterContent(); // Cập nhật nội dung thư
+                });
+            },500)
+        }
+
+        // Đóng thư
+        document.querySelector(".fa-xmark").addEventListener("click", function() {
+            $(".wrapperLetterForm").fadeOut();
+        });
+    });
+</script>
+
+</html>
